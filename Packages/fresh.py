@@ -113,7 +113,7 @@ def main():
                 dic={}
             display(dic,FileName)
     else:
-        txt=input("Do you want to have time to live foe the JSON file? If yes press Y,else press N: ")
+        txt=input("Do you want to have time to live for the JSON file? If yes press Y,else press N: ")
         if txt == 'Y' or txt == 'y':
             t=int(input("Enter the time to live in seconds: "))
             dic=ttldict.TTLDict(ttl=t)
