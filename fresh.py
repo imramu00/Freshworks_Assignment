@@ -21,7 +21,7 @@ def create(dic,fi):
                                 v=input("Enter the value:")
                                 if (getsizeof(v)/kb)<16:
                                     dic[k]=v
-                                    dic[k]=ttldict.TTLDict(ttl=2)
+                                    dic[k]=ttldict.TTLDict(ttl=10)
                                     count+=1
                                 else:
                                     print("Size of value exceeds 16 KB,cannot insert the key value pair")
@@ -64,7 +64,7 @@ def display(dic,fi):
     print("2.Read")
     print("3.Delete")
     print("4.Exit")
-    k=input("Enter Your option ")
+    k=input("Enter Your option: ")
     if k=='1':
         create(dic,fi)
         display(dic,fi)
