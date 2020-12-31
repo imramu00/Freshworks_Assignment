@@ -3,25 +3,25 @@ import json
 import time
 from sys import getsizeof
 from Packages import ttldict
+gb=1073741824
+kb=16000
 
 def ifFileExistes(FileName):
     return os.path.exists(FileName)
     
 def create(dic,fi):
-        size = os.path.getsize(fi)/1073741824
+        size = os.path.getsize(fi)/gb
         if size<1:
             n=int(input("Enter number of key value pairs :"))
             count=0
             while count<n:
-                    print("Enter the key")
-                    k=input()
+                    k=input("Enter the key: ")
                     if len(k)<32:
                         if k not in dic:
-                                print("Enter the value")
-                                v=input()
-                                if (getsizeof(v)/16000)<16:
+                                v=input("Enter the value:")
+                                if (getsizeof(v)/kb)<16:
                                     dic[k]=v
-                                    dic[k]=ttldict.TTLDict(ttl=2)
+                                    dic[k]=ttldict.TTLDict(ttl=10)
                                     count+=1
                                 else:
                                     print("Size of value exceeds 16 KB,cannot insert the key value pair")
@@ -34,8 +34,7 @@ def create(dic,fi):
 
 def delete(dic):
         if len(dic)>0:
-                print("Enter the key to be deleted")
-                k=input()
+                k=input("Enter the key to be deleted: ")
                 if k in dic:
                     if len(dic[k])==0:
                         print("Key-Value pair expired")
@@ -48,8 +47,7 @@ def delete(dic):
 
 def read(dic):
         if len(dic)>0:
-                print("Enter the key: ")
-                k=input()
+                k=input("Enter the key: ")
                 if k in dic:
                     if len(dic[k])==0:
                         print("Key-Value pair expired")
@@ -66,7 +64,7 @@ def display(dic,fi):
     print("2.Read")
     print("3.Delete")
     print("4.Exit")
-    k=input("Enter Your option")
+    k=input("Enter Your option: ")
     if k=='1':
         create(dic,fi)
         display(dic,fi)
@@ -80,11 +78,11 @@ def display(dic,fi):
         with open(fi,'w') as f:
             json.dump(dic,f,indent=2)       
     else:
-        print("Enter a Valid option")
+        print("Enter a Valid option ")
         display(dic)
 
 def main():
-    check=input("Do You want to open an existing JSON file? ,If yes press Y , else press N \n")
+    check=input("Do You want to open an existing JSON file? If yes press Y , else press N \n")
     if check == 'Y' or check=='y':
 
         FileName=input("Enter the JSON file name\n")
@@ -94,7 +92,7 @@ def main():
         if flag==True:
             fi=os.getcwd()+"\\"+FileName
             if os.path.exists(fi):
-                size = os.path.getsize(fi)/1073741824
+                size = os.path.getsize(fi)/gb
                 if size<1:
                     try:
                         os.rename(fi, fi)
