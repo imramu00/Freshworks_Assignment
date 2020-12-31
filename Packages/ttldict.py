@@ -3,7 +3,7 @@ import time
 
 class TTLDict(dict):
 
-    def __init__(self, ttl=5):
+    def __init__(self, ttl):
         self._ttl = ttl
         self.__map = {}
         self._flag = True

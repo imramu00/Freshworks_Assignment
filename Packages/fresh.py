@@ -10,18 +10,17 @@ def ifFileExistes(FileName):
     return os.path.exists(FileName)
     
 def create(dic,fi):
-        size = os.path.getsize(fi)/gb
-        if size<1:
-            n=int(input("Enter number of key value pairs :"))
+        
             count=0
-            while count<n:
+            while count<1:
                     k=input("Enter the key: ")
                     if len(k)<32:
                         if k not in dic:
                                 v=input("Enter the value:")
                                 if (getsizeof(v)/kb)<16:
                                     dic[k]=v
-                                    dic[k]=ttldict.TTLDict(ttl=10)
+                                    #t=int(input("Enter the numbers of seconds for the value to live: "))
+                                    #dic[k]=ttldict.TTLDict(dic[k])
                                     count+=1
                                 else:
                                     print("Size of value exceeds 16 KB,cannot insert the key value pair")
@@ -29,16 +28,15 @@ def create(dic,fi):
                                 print("key already exists")
                     else:
                         print("Length of key should be at most 32")
-        else:
-            print("The file size exceeds 1GB cannot create")
+        
 
 def delete(dic):
         if len(dic)>0:
                 k=input("Enter the key to be deleted: ")
                 if k in dic:
-                    if len(dic[k])==0:
-                        print("Key-Value pair expired")
-                    else:
+                    # if len(dic[k]) == 0:
+                    #     print("Key-Value pair expired")
+                    # else:
                         del dic[k]
                 else:
                         print("No key value pair exist")
@@ -49,9 +47,9 @@ def read(dic):
         if len(dic)>0:
                 k=input("Enter the key: ")
                 if k in dic:
-                    if len(dic[k])==0:
-                        print("Key-Value pair expired")
-                    else:
+                    # if len(dic[k])==0:
+                    #     print("Key-Value pair expired")
+                    # else:
                         print(f'The value for {k} is {dic[k]}')          
                 else:
                         print("No key value pair exist")
@@ -67,6 +65,8 @@ def display(dic,fi):
     k=input("Enter Your option: ")
     if k=='1':
         create(dic,fi)
+        #t=int(input("Enter the numbers of seconds for the dictionary to live: "))
+        #dic=ttldict.TTLDict(t)
         display(dic,fi)
     elif k=='2':
         read(dic)
@@ -105,10 +105,20 @@ def main():
                     print("The file you are trying to open is more than 1 GB,cannot open")
             
         else:
-            dic={}
+            txt=input("Do you want to have time to live foe the JSON file? If yes press Y,else press N: ")
+            if txt == 'Y' or txt == 'y':
+                t=int(input("Enter the time to live in seconds: "))
+                dic=ttldict.TTLDict(ttl=t)
+            else:
+                dic={}
             display(dic,FileName)
     else:
-        dic={}
+        txt=input("Do you want to have time to live foe the JSON file? If yes press Y,else press N: ")
+        if txt == 'Y' or txt == 'y':
+            t=int(input("Enter the time to live in seconds: "))
+            dic=ttldict.TTLDict(ttl=t)
+        else:
+            dic={}
         FileName=input("Enter the file name to save\n")
         FileName=FileName+'.json'
         display(dic,FileName)
