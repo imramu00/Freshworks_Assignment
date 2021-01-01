@@ -4,7 +4,7 @@ import time
 from sys import getsizeof
 from Packages import ttldict
 gb=1073741824
-kb=16000
+kb=1000
 
 def ifFileExistes(FileName):
     return os.path.exists(FileName)
