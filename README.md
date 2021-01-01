@@ -16,7 +16,7 @@
       -If it is not being used by any other proceess.
       -If the given file doesn't exist a new file in the given name would be created.
     You would require to given a name to the new JSON file to be created and opened.
-    If you create a new file , you have the option to set time to live for the entire JSON object in seconds.
+   ### If you create a new file , you have the option to set time to live for the entire JSON object in seconds.
 ## 2.Create:
     -You could create a new Key-Value pair only if the file is less than 1GB in size.
     -The length of both key and value should be less that 32char in length.
